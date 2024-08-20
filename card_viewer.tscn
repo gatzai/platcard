@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://bs5xxj8h610m0"]
+
+[ext_resource type="Script" path="res://scripts/card_container.gd" id="1_w3vvq"]
+[ext_resource type="PackedScene" uid="uid://pifsaf8i8wht" path="res://card/card_slot.tscn" id="2_f3ojo"]
+[ext_resource type="PackedScene" uid="uid://bfq6botvcchfn" path="res://card/card.tscn" id="2_ra1t5"]
+[ext_resource type="Shader" path="res://card/game_background.gdshader" id="3_s3tb3"]
+[ext_resource type="Script" path="res://scripts/card_holder.gd" id="4_t0jm3"]
+[ext_resource type="Texture2D" uid="uid://d2w3badc771v4" path="res://icon.svg" id="5_vkwex"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l341s"]
+shader = ExtResource("3_s3tb3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_k2rwy"]
+size = Vector2(1920, 1080)
+
+[node name="CardViewer" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+z_index = -4096
+material = SubResource("ShaderMaterial_l341s")
+position = Vector2(960, 540)
+mesh = SubResource("QuadMesh_k2rwy")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CardContainer" type="HBoxContainer" parent="UI"]
+custom_minimum_size = Vector2(200, 200)
+layout_direction = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -301.0
+offset_right = 310.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 110
+alignment = 1
+script = ExtResource("1_w3vvq")
+
+[node name="CardSlot1" parent="UI/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="CardSlot2" parent="UI/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="CardSlot3" parent="UI/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="CardSlot4" parent="UI/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="UI2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CardContainer" type="HBoxContainer" parent="UI2"]
+custom_minimum_size = Vector2(200, 200)
+layout_direction = 1
+offset_left = 181.0
+offset_top = 312.0
+offset_right = 801.0
+offset_bottom = 512.0
+alignment = 1
+script = ExtResource("1_w3vvq")
+
+[node name="CardSlot1" parent="UI2/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="CardSlot2" parent="UI2/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="CardSlot3" parent="UI2/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="CardSlot4" parent="UI2/CardContainer" instance=ExtResource("2_f3ojo")]
+layout_mode = 2
+
+[node name="Card" parent="UI2/CardContainer" instance=ExtResource("2_ra1t5")]
+layout_mode = 2
+
+[node name="Holder" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 306.0
+offset_top = 872.0
+offset_right = 346.0
+offset_bottom = 912.0
+script = ExtResource("4_t0jm3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Holder"]
+texture = ExtResource("5_vkwex")
+
+[node name="CardStack" type="Control" parent="."]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1639.0
+offset_top = 814.0
+offset_right = 1679.0
+offset_bottom = 854.0
+
+[node name="Label" type="Label" parent="CardStack"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "卡排堆
+"
+
+[node name="CardPlacement" type="Control" parent="."]
+custom_minimum_size = Vector2(800, 300)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 544.0
+offset_top = 238.0
+offset_right = 1344.0
+offset_bottom = 538.0
+
+[node name="Label" type="Label" parent="CardPlacement"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "卡排放置区
+"
+
+[node name="CardRemoved" type="Control" parent="."]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1578.0
+offset_top = 236.0
+offset_right = 1578.0
+offset_bottom = 236.0
+
+[node name="Label" type="Label" parent="CardRemoved"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "卡排丢弃区
+"
+
+[connection signal="mouse_entered" from="UI/CardContainer" to="UI/CardContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CardContainer" to="UI/CardContainer" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI2/CardContainer" to="UI2/CardContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI2/CardContainer" to="UI2/CardContainer" method="_on_mouse_exited"]

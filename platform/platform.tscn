@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dygtnxr4v3e4i"]
+
+[ext_resource type="PackedScene" uid="uid://c05jmql2st0mx" path="res://platform/player.tscn" id="1_1hv6e"]
+[ext_resource type="PackedScene" uid="uid://dg1v3sjtye0av" path="res://platform/tile_map.tscn" id="2_15r5q"]
+[ext_resource type="Script" path="res://platform/code/area_selector.gd" id="3_g4u1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_028f0"]
+size = Vector2(1000, 150)
+
+[sub_resource type="QuadMesh" id="QuadMesh_idcxd"]
+size = Vector2(1000, 150)
+
+[sub_resource type="QuadMesh" id="QuadMesh_a3fej"]
+size = Vector2(2000, 4000)
+
+[node name="Platform" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_1hv6e")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(200, 562)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_028f0")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+mesh = SubResource("QuadMesh_idcxd")
+
+[node name="TileMap" parent="." instance=ExtResource("2_15r5q")]
+position = Vector2(279, 224)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(394, 124)
+zoom = Vector2(0.05, 0.05)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_g4u1a")
+
+[node name="Placement" type="MeshInstance2D" parent="Control"]
+self_modulate = Color(1, 1, 1, 0.266667)
+position = Vector2(1000, 2000)
+mesh = SubResource("QuadMesh_a3fej")

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1jjie1qpb5vk"]
+
+[ext_resource type="Shader" path="res://card/card.gdshader" id="1_c3ppc"]
+
+[resource]
+shader = ExtResource("1_c3ppc")
+shader_parameter/width = 350.0
+shader_parameter/height = 610.0
+shader_parameter/round_fact = 100.0

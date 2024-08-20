@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckvkblkfkbmkw"]
+
+[ext_resource type="Script" path="res://scripts/card_holder.gd" id="1_wh1fn"]
+[ext_resource type="Texture2D" uid="uid://d2w3badc771v4" path="res://icon.svg" id="2_t7ydg"]
+
+[node name="CardHolder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wh1fn")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(0.101961, 0.101961, 0.101961, 0.372549)
+position = Vector2(44, 44)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_t7ydg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(40, 40)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_t7ydg")
